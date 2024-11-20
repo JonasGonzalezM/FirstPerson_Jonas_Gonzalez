@@ -17,6 +17,15 @@ public class WeaponSway : MonoBehaviour
 
         // calcular la rotacion objetivo
          Quaternion rotationX=Quaternion.AngleAxis(-mouseY,Vector3.right);
+         Quaternion rotationY=Quaternion.AngleAxis(mouseX,Vector3.up);
+
+        Quaternion targetRotation = rotationX*rotationY;
+
+
+        //rotacion
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, suave * Time.deltaTime);
+
+
 
     }
 }

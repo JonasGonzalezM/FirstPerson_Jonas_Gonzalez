@@ -923,6 +923,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44792b87704600d49a577b6619d803fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  suave: 8
+  swayMultiplicador: 3
 --- !u!1 &1105809898
 GameObject:
   m_ObjectHideFlags: 0
