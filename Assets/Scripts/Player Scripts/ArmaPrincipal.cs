@@ -4,5 +4,15 @@ using UnityEngine;
 
 public class ArmaPrincipal : MonoBehaviour
 {
-    [SerializeField] DatoArmas datoArmas; 
+    [SerializeField] public GameObject balaPrefab ,
+    
+
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject bala = Instantiate(balaPrefab, transform);
+        }
+    }
 }

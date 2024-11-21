@@ -694,7 +694,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 606786476}
-  - component: {fileID: 606786477}
   m_Layer: 0
   m_Name: Fusil
   m_TagString: Untagged
@@ -759,21 +758,9 @@ Transform:
   - {fileID: 5694262485175549431}
   - {fileID: 6840412606255624638}
   - {fileID: 5441880002594960633}
+  - {fileID: 2043189733}
   m_Father: {fileID: 1304933713495544651}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &606786477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 606786475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a734cc4ded0aa74186c1f3451edca94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  datoArmas: {fileID: 11400000, guid: 3b5b1229a1ae1e849a7a565c19ba0963, type: 2}
 --- !u!1 &797657468
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,7 +965,6 @@ Transform:
   m_Children:
   - {fileID: 3074461168624845865}
   - {fileID: 4184595920388387766}
-  - {fileID: 2043189733}
   m_Father: {fileID: 330585546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1017246362
@@ -1257,8 +1243,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2043189733}
+  - component: {fileID: 2043189734}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: SpawnerBalas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1272,13 +1259,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043189732}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.22321743, y: -0.29900002, z: 1.5802519}
-  m_LocalScale: {x: 2.3397045, y: 2.6404998, z: 2.3397038}
+  m_LocalRotation: {x: -0.7071068, y: 2.078e-39, z: 2.9634676e-24, w: 0.7071067}
+  m_LocalPosition: {x: 0.49188796, y: 2.200081, z: 7.0366793}
+  m_LocalScale: {x: 20.924952, y: 23.615088, z: 20.924944}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1017246361}
+  m_Father: {fileID: 606786476}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2043189734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043189732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a734cc4ded0aa74186c1f3451edca94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  balaPrefab: {fileID: 8780273211206642806}
+  spawnPoint: {fileID: 2043189732}
 --- !u!4 &2992400888690722
 Transform:
   m_ObjectHideFlags: 0
@@ -14548,6 +14549,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126aa382ff23f5b46a0bb5f1d7829383, type: 3}
+--- !u!1 &8780273211206642806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 282693189027353961, guid: 126aa382ff23f5b46a0bb5f1d7829383,
+    type: 3}
+  m_PrefabInstance: {fileID: 8780273211206642805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8797870777175382155
 GameObject:
   m_ObjectHideFlags: 0
