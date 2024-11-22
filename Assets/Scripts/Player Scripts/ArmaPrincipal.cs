@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArmaPrincipal : MonoBehaviour
 {
-    [SerializeField] public GameObject balaPrefab ,
+    [SerializeField] public GameObject balaPrefab;
     
 
 
