@@ -13,6 +13,8 @@ public class MovimientoPlayer : MonoBehaviour
     public Transform playerTransform;  // El transform del jugador.
     public float sensibilidadRatón = 2f;  // Sensibilidad para el movimiento del ratón
     public float limiteRotacionVertical = 80f;  // Límite para la rotación vertical de la cámara
+    public float wallRunSpeed;
+    
 
     public Transform checkSuelo;
     public float distanciaSuelo = 0.4f;
@@ -33,10 +35,22 @@ public class MovimientoPlayer : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;  // Bloquea el cursor en el centro de la pantalla
         Cursor.visible = false;  // Opcional: para esconder el cursor
     }
+    public MovementState state;
+
+    public enum MovementState
+    {
+        wallrunning,
+    }
+    public bool wallrunning;
 
     // Update is called once per frame
     void Update()
     {
+        if (wallrunning)
+        {
+            state = MovementState.wallrunning;
+            velocidad = wallRunSpeed;
+        }
         // Movimiento del ratón para la rotación horizontal
         float mouseX = Input.GetAxis("Mouse X") * sensibilidadRatón;
 
@@ -95,4 +109,7 @@ public class MovimientoPlayer : MonoBehaviour
 
         ultimaPosicion = gameObject.transform.position;
     }
+
+
+    
 }
