@@ -8,8 +8,8 @@ public class ArmaPrincipal : MonoBehaviour
     [SerializeField] public Transform puntoDeDisparo;  // Referencia al punto de disparo en la boca del arma
     [SerializeField] public float velocidadDeDisparo = 20f;  // Velocidad con la que la bala se disparará
     [SerializeField] private float tiempoVidaBala = 3f;  // Tiempo en segundos antes de destruir la bala
-    [SerializeField] private float fuerzaRetroceso = 0.1f;  // Fuerza del retroceso (ajustable)
-    [SerializeField] private float duracionRetroceso = 0.1f;  // Duración del retroceso (ajustable)
+    [SerializeField] private float fuerzaRetroceso = 0.08f;  // Fuerza del retroceso (ajustable)
+    [SerializeField] private float duracionRetroceso = 0.03f;  // Duración del retroceso (ajustable)
     [SerializeField] private Transform brazoPadre;  // Referencia al GameObject padre (brazos)
 
     private Vector3 posicionInicialBrazo;  // Posición inicial de los brazos
