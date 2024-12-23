@@ -7,6 +7,7 @@ public class MovimientoPlayer : MonoBehaviour
     private CharacterController controller;
     public Transform cameraTransform; // La cámara que controla la orientación.
     public float velocidad = 12f;
+    public float velocidadCorrer = 18f; // Velocidad al correr
     public float gravedad = -9.81f * 2;
     public float alturaSalto = 3f;
     public float distancia = 5f;
@@ -14,7 +15,6 @@ public class MovimientoPlayer : MonoBehaviour
     public float sensibilidadRatón = 2f;  // Sensibilidad para el movimiento del ratón
     public float limiteRotacionVertical = 80f;  // Límite para la rotación vertical de la cámara
     public float wallRunSpeed;
-    
 
     public Transform checkSuelo;
     public float distanciaSuelo = 0.4f;
@@ -35,22 +35,23 @@ public class MovimientoPlayer : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;  // Bloquea el cursor en el centro de la pantalla
         Cursor.visible = false;  // Opcional: para esconder el cursor
     }
-    public MovementState state;
+    //public MovementState state;
 
-    public enum MovementState
-    {
-        wallrunning,
-    }
-    public bool wallrunning;
+    //public enum MovementState
+    //{
+    //    wallrunning,
+    //}
+    //public bool wallrunning;
 
     // Update is called once per frame
     void Update()
     {
-        if (wallrunning)
-        {
-            state = MovementState.wallrunning;
-            velocidad = wallRunSpeed;
-        }
+        //if (wallrunning)
+        //{
+        //    state = MovementState.wallrunning;
+        //    velocidad = wallRunSpeed;
+        //}
+
         // Movimiento del ratón para la rotación horizontal
         float mouseX = Input.GetAxis("Mouse X") * sensibilidadRatón;
 
@@ -80,9 +81,17 @@ public class MovimientoPlayer : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        // Movimiento del jugador
-        Vector3 movimiento = transform.right * h + transform.forward * v;
-        controller.Move(movimiento * velocidad * Time.deltaTime);
+        // Verificar si se está presionando la tecla Shift para correr
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            // Si está presionado Shift, aumentar la velocidad
+            controller.Move((transform.right * h + transform.forward * v) * velocidadCorrer * Time.deltaTime);
+        }
+        else
+        {
+            // Si no se presiona Shift, usar la velocidad normal
+            controller.Move((transform.right * h + transform.forward * v) * velocidad * Time.deltaTime);
+        }
 
         // Verificar si el jugador puede saltar
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -109,7 +118,4 @@ public class MovimientoPlayer : MonoBehaviour
 
         ultimaPosicion = gameObject.transform.position;
     }
-
-
-    
 }
