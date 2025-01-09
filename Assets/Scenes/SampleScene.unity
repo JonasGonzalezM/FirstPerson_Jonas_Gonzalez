@@ -1410,9 +1410,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 717429335}
   playerObj: {fileID: 482867548}
-  maxSlideTime: 0
-  slideForce: 0
-  slideYScale: 0
+  maxSlideTime: 0.75
+  slideForce: 400
+  slideYScale: 0.5
   slideKey: 306
 --- !u!1 &1264199087
 GameObject:
