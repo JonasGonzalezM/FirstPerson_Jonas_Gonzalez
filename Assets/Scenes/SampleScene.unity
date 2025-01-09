@@ -1272,8 +1272,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1235697179}
+  - component: {fileID: 1235697184}
   - component: {fileID: 1235697183}
-  - component: {fileID: 1235697182}
   - component: {fileID: 1235697181}
   - component: {fileID: 1235697180}
   m_Layer: 0
@@ -1363,24 +1363,6 @@ MonoBehaviour:
   sliding: 0
   crouching: 0
   wallrunning: 0
---- !u!114 &1235697182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235697178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f27d101dffbeac54fa14345a57e27a2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientation: {fileID: 717429335}
-  playerObj: {fileID: 482867548}
-  maxSlideTime: 0.75
-  slideForce: 400
-  slideYScale: 0.5
-  slideKey: 306
 --- !u!114 &1235697183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1414,6 +1396,24 @@ MonoBehaviour:
   gravityCounterForce: 6.1
   cam: {fileID: 330585549}
   orientation: {fileID: 717429335}
+--- !u!114 &1235697184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235697178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27d101dffbeac54fa14345a57e27a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 717429335}
+  playerObj: {fileID: 482867548}
+  maxSlideTime: 0
+  slideForce: 0
+  slideYScale: 0
+  slideKey: 306
 --- !u!1 &1264199087
 GameObject:
   m_ObjectHideFlags: 0
