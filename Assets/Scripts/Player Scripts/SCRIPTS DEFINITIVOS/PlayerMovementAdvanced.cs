@@ -5,147 +5,154 @@ using TMPro;
 
 public class PlayerMovementAdvanced : MonoBehaviour
 {
+    // --- Variables para controlar el movimiento del jugador ---
     [Header("Movement")]
-    private float moveSpeed;
-    public float walkSpeed;
-    public float sprintSpeed;
-    public float slideSpeed;
-    private float desiredMoveSpeed;
-    private float lastDesiredMoveSpeed;
-    public float wallrunSpeed;
+    private float moveSpeed; // Velocidad actual del jugador
+    public float walkSpeed; // Velocidad al caminar
+    public float sprintSpeed; // Velocidad al correr
+    public float slideSpeed; // Velocidad al deslizarse
+    private float desiredMoveSpeed; // Velocidad deseada según el estado
+    private float lastDesiredMoveSpeed; // Última velocidad deseada
+    public float wallrunSpeed; // Velocidad al correr por la pared
 
-    public float groundDrag;
+    public float groundDrag; // Fricción con el suelo
 
+    // --- Variables para saltar ---
     [Header("Jumping")]
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
-    bool readyToJump=true;
+    public float jumpForce; // Fuerza del salto
+    public float jumpCooldown; // Tiempo de espera entre saltos
+    public float airMultiplier; // Multiplicador de movimiento en el aire
+    bool readyToJump = true; // Indica si el jugador puede saltar
 
+    // --- Variables para agacharse ---
     [Header("Crouching")]
-    public float crouchSpeed;
-    public float crouchYScale;
-    private float startYScale;
+    public float crouchSpeed; // Velocidad al agacharse
+    public float crouchYScale; // Escala en Y al agacharse
+    private float startYScale; // Escala inicial en Y
 
+    // --- Teclas para acciones ---
     [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode jumpKey = KeyCode.Space; // Tecla para saltar
+    public KeyCode sprintKey = KeyCode.LeftShift; // Tecla para correr
+    public KeyCode crouchKey = KeyCode.LeftControl; // Tecla para agacharse
 
+    // --- Comprobación de suelo ---
     [Header("Ground Check")]
-    public float playerHeight;
-    public LayerMask whatIsGround;
-    bool grounded;
+    public float playerHeight; // Altura del jugador
+    public LayerMask whatIsGround; // Capas que se consideran suelo
+    bool grounded; // Indica si el jugador está tocando el suelo
 
+    // --- Manejo de pendientes ---
     [Header("Slope Handling")]
-    public float maxSlopeAngle;
-    private RaycastHit slopeHit;
-    private bool exitingSlope;
-    
+    public float maxSlopeAngle; // Ángulo máximo de pendiente
+    private RaycastHit slopeHit; // Información sobre la pendiente actual
+    private bool exitingSlope; // Indica si el jugador está dejando una pendiente
 
-    public Transform orientation;
+    public Transform orientation; // Dirección de orientación del jugador
 
-    float horizontalInput;
-    float verticalInput;
+    float horizontalInput; // Entrada horizontal del jugador
+    float verticalInput; // Entrada vertical del jugador
 
-    Vector3 moveDirection;
+    Vector3 moveDirection; // Dirección del movimiento calculada
 
-    Rigidbody rb;
+    Rigidbody rb; // Componente Rigidbody del jugador
 
-    //Esto lo que se encargará es de guardar los estados del jugador ya sea correr, agacharse, andar o estar en el aire.
-    public MovementState state;
+    // --- Estados de movimiento del jugador ---
+    public MovementState state; // Estado actual del jugador
     public enum MovementState
     {
-        walking,
-        sprinting,
-        wallrunning,
-        crouching,
-        sliding,
-        air
+        walking, 
+        sprinting, 
+        wallrunning, 
+        crouching, 
+        sliding, 
+        air 
     }
 
-    public bool sliding;
-    public bool crouching;
-    public bool wallrunning;
+    public bool sliding; // Indica si el jugador está deslizando
+    public bool crouching; // Indica si el jugador está agachado
+    public bool wallrunning; // Indica si el jugador está corriendo por la pared
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        rb = GetComponent<Rigidbody>(); // Obtener el componente Rigidbody
+        rb.freezeRotation = true; // Evitar que el jugador rote por la física
 
-        readyToJump = true;
-
-        startYScale = transform.localScale.y;
+        readyToJump = true; // Inicializar listo para saltar
+        startYScale = transform.localScale.y; // Guardar la escala inicial en Y
     }
 
     private void Update()
     {
-        //Comprobar el suelo
+        // Comprobar si el jugador está tocando el suelo
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        MyInput();
-        SpeedControl();
-        StateHandler();
+        MyInput(); // Procesar entradas del jugador
+        SpeedControl(); // Controlar la velocidad según el estado
+        StateHandler(); // Manejar el estado del jugador
 
-        //Manejo del drag
+        // Ajustar la fricción dependiendo si está en el suelo
         if (grounded)
+        {
             rb.drag = groundDrag;
+        }
         else
+        {
             rb.drag = 0;
+        }
     }
-    
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        MovePlayer(); // Aplicar movimiento basado en la física
     }
 
     private void MyInput()
     {
+        // Capturar entradas de movimiento
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        //El momento de Saltar
+        // Manejar el salto
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
-            readyToJump = false;
-
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
+            readyToJump = false; // Prevenir saltos múltiples
+            Jump(); // Ejecutar el salto o llamar al Método de Salto
+            Invoke(nameof(ResetJump), jumpCooldown); // Restablecer la capacidad de saltar después de un tiempo el cual es el JumpCoolDown
+            //El operador "nameof" en C# se utiliza para obtener el nombre de una variable,
+            //método, propiedad o clase como una cadena de texto. Es una forma segura y fácil de trabajar con nombres,
+            //ya que está vinculada al código fuente y evita errores de escritura y si hay un cambio lo actualiza
+            //y así se evitan errores de compilación 
         }
 
-        //Comienzo de agacharse
+        // Manejar el inicio del agachado
         if (Input.GetKeyDown(crouchKey))
         {
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z); // Reducir la escala en Y
+            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse); // Aplicar fuerza hacia abajo
         }
 
-        //Finalizar el agachado
+        // Manejar el fin del agachado
         if (Input.GetKeyUp(crouchKey))
         {
-            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z); // Restaurar la escala original
         }
     }
 
     private void StateHandler()
     {
-        //Modo - Wallrunning
+        // Estado: Corriendo por la pared
         if (wallrunning)
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallrunSpeed;
         }
-
-
-
-
-        // Modo - Deslizamiento
-        if (sliding)
+        // Estado: Deslizándose
+        else if (sliding)
         {
             state = MovementState.sliding;
 
+            // Aumentar velocidad al deslizarse en pendiente
             if (OnSlope() && rb.velocity.y < 0.1f)
             {
                 desiredMoveSpeed = slideSpeed;
@@ -155,121 +162,105 @@ public class PlayerMovementAdvanced : MonoBehaviour
                 desiredMoveSpeed = sprintSpeed;
             }
         }
-
-        //Modo - Agachado
+        // Estado: Agachado
         else if (Input.GetKey(crouchKey))
         {
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
         }
-
-        //Modo -Sprinting
+        // Estado: Corriendo
         else if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
         }
-
-        //Modo -Andar
+        // Estado: Caminando
         else if (grounded)
         {
             state = MovementState.walking;
             desiredMoveSpeed = walkSpeed;
         }
-
-        //Modo - Aire
+        // Estado: En el aire
         else
         {
             state = MovementState.air;
         }
 
-
-        //checkear si la velocidadDeseada (desiredMoveSpeed) ha cambiado de manera drástica
+        // Verificar cambios drásticos en la velocidad deseada
         if (Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && moveSpeed != 0)
         {
             StopAllCoroutines();
-            StartCoroutine(SmoothlyLerpMoveSpeed());
+            StartCoroutine(SmoothlyLerpMoveSpeed()); // Ajustar suavemente la velocidad
         }
         else
         {
             moveSpeed = desiredMoveSpeed;
         }
-       
-        lastDesiredMoveSpeed = desiredMoveSpeed;
+
+        lastDesiredMoveSpeed = desiredMoveSpeed; // Actualizar velocidad deseada
     }
 
-    
-    //Lo que se va a hacer ahora es que el movimiento no se baje de manera repentina, es decir que vamos a mantener nuestro momentum
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
-        //Cambiar de manera suave la velocidad
+        // Ajustar suavemente la velocidad deseada
         float time = 0;
         float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float startValue = moveSpeed;
 
         while (time < difference)
         {
-            moveSpeed = Mathf.Lerp(startValue,desiredMoveSpeed, time/ difference);
-            time+= Time.deltaTime;
+            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference); // Interpolación lineal
+            time += Time.deltaTime;
             yield return null;
         }
 
-        moveSpeed = desiredMoveSpeed;
+        moveSpeed = desiredMoveSpeed; // Asegurarse de alcanzar la velocidad deseada
     }
-
-
 
     private void MovePlayer()
     {
-        //calcular la direccion del movimiento
+        // Calcular dirección del movimiento
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        //En la cuesta
+        // Movimiento en pendiente
         if (OnSlope() && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection(moveDirection) * moveSpeed * 20f, ForceMode.Force);
 
             if (rb.velocity.y > 0)
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force); // Estabilizar en pendientes
         }
-
-        // en el suelo
+        // Movimiento en el suelo
         else if (grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-
         }
-
-        //en el aire
+        // Movimiento en el aire
         else if (!grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-
         }
 
-        //Apagar la gravedad cuando estemos en una cuesta o pendiente
+        // Desactivar gravedad en pendientes
         if (!wallrunning)
         {
             rb.useGravity = !OnSlope();
-
         }
     }
 
     private void SpeedControl()
     {
-        //Limitar la velocidad en las pendientes
+        // Limitar velocidad en pendientes
         if (OnSlope() && !exitingSlope)
         {
             if (rb.velocity.magnitude > moveSpeed)
                 rb.velocity = rb.velocity.normalized * moveSpeed;
         }
-
-        //Limitar la velocidad en el suelo o en el aire
+        // Limitar velocidad en suelo o aire
         else
         {
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-            //Limitar la velocidad si es necesario
             if (flatVel.magnitude > moveSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
@@ -280,33 +271,33 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void Jump()
     {
-        exitingSlope = true;
+        exitingSlope = true; // Indicar que estamos saliendo de una pendiente
 
-        //reseteo de la velocidad en y
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Resetear velocidad vertical
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse); // Aplicar fuerza de salto
     }
+
     private void ResetJump()
     {
-        readyToJump = true;
-
-        exitingSlope = false;
+        readyToJump = true; // Permitir saltar nuevamente
+        exitingSlope = false; // Reiniciar estado de pendiente
     }
 
     public bool OnSlope()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        // Comprobar si estamos en una pendiente
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
         }
 
-        return false;
+        return false; // No estamos en una pendiente
     }
 
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
+        // Calcular dirección ajustada para pendientes
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 }

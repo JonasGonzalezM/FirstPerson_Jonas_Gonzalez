@@ -74,7 +74,7 @@ public class Sliding : MonoBehaviour
     } 
     private void SlidingMovement()
     {
-        //Esto es para poder hacer slide en cualquier direccion dependiendo de la Key que elijamos
+        //Esto es para poder hacer slide en cualquier direccion dependiendo de la Key/tecla que elijamos
         Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
 
