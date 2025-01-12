@@ -154,7 +154,8 @@ MonoBehaviour:
   "disparosPorR\xE1faga": 6
   intervaloDisparos: 0.1
   "intervaloR\xE1fagas": 2
-  fogonazoPrefab: {fileID: 0}
+  fogonazoPrefab: {fileID: 337669658940720882, guid: 05e22925977142c469e7bfa1c6b7ba34,
+    type: 3}
   vidaBala: 3
 --- !u!33 &577076558847677102
 MeshFilter:
