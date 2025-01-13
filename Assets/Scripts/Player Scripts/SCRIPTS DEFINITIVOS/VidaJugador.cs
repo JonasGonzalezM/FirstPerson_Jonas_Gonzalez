@@ -17,7 +17,7 @@ public class VidaJugador : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         Morir();
     }
@@ -25,7 +25,7 @@ public class VidaJugador : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Balaenemiga"))
+        if (other.CompareTag("BalaEnemiga"))
         {
             vidaActual -= 10; // Se quita puntos de vida 
             Destroy(other.gameObject); //Destruir la bala

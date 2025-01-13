@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7228843615191081328}
   m_Layer: 0
   m_Name: 'Bala '
-  m_TagString: Untagged
+  m_TagString: BalaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 831463215200287319}
   m_Layer: 0
   m_Name: Bala
-  m_TagString: Untagged
+  m_TagString: BalaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -314,6 +314,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Bala '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917203093946972330, guid: 36a9e758fddc2734284530d138837a92,
+        type: 3}
+      propertyPath: m_TagString
+      value: BalaEnemiga
       objectReference: {fileID: 0}
     - target: {fileID: 4998946259336595964, guid: 36a9e758fddc2734284530d138837a92,
         type: 3}

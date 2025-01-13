@@ -14,12 +14,15 @@ public class TorretaMediana : MonoBehaviour
     [SerializeField] private float intervaloRáfagas = 2f; // Tiempo entre ráfagas
     [SerializeField] private GameObject fogonazoPrefab; // Prefab del objeto 3D para el fogonazo
     [SerializeField] private float vidaBala = 3f;
+    [SerializeField] private float rangoDisparo = 200f;
 
     private bool puedeDisparar = true; // Controla si la torreta puede disparar
 
     void Update()
     {
-        if (puedeDisparar)
+        float distancia = Vector3.Distance(transform.position, player.transform.position);
+        
+        if (puedeDisparar&& distancia <= rangoDisparo)
         {
             StartCoroutine(DispararRáfaga());
         }

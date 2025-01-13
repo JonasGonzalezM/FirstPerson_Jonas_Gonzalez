@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TorretaPesada : MonoBehaviour
@@ -15,13 +13,18 @@ public class TorretaPesada : MonoBehaviour
     [SerializeField] private float intervaloRáfagas = 2f; // Tiempo entre ráfagas
     [SerializeField] private GameObject fogonazoPrefab; // Prefab del objeto 3D para el fogonazo
     [SerializeField] private float vidaBala = 3f;
+    [SerializeField] private float rangoDisparo = 290f; // Distancia mínima para disparar
     private float velocidadGiro = 1500f;
 
     private bool puedeDisparar = true; // Controla si la torreta puede disparar
 
     void Update()
     {
-        if (puedeDisparar)
+        // Verificar la distancia entre la torreta y el jugador
+        float distancia = Vector3.Distance(transform.position, player.transform.position);
+
+        // Solo disparar si el jugador está dentro del rango
+        if (puedeDisparar && distancia <= rangoDisparo)
         {
             StartCoroutine(DispararRáfaga());
         }
@@ -31,7 +34,7 @@ public class TorretaPesada : MonoBehaviour
 
     private void RotarCanon()
     {
-        transform.Rotate(Vector3.forward, velocidadGiro*Time.deltaTime);
+        transform.Rotate(Vector3.forward, velocidadGiro * Time.deltaTime);
     }
 
     private IEnumerator DispararRáfaga()
