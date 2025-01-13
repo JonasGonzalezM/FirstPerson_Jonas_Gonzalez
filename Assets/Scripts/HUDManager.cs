@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
-public class HUD : MonoBehaviour
+public class HUDManager : MonoBehaviour
 {
     [Header("Player Stats")]
-    [SerializeField] public PlayerHealth player; // Referencia al script del jugador para obtener salud
+    [SerializeField] public VidaJugador player; // Referencia al script del jugador para obtener salud
     [SerializeField] public ArmaPrincipal fusil;   // Referencia al script del fusil para obtener munición
 
     [Header("UI Elements")]
@@ -16,11 +15,11 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
-        // Actualizar el texto de la vida del jugador
-        if (vidaTexto != null && player != null)
-        {
-            vidaTexto.text = "Vida: " + ((int)player.maxHealth).ToString();
-        }
+        //// Actualizar el texto de la vida del jugador
+        //if (vidaTexto != null && player != null)
+        //{
+        //    vidaTexto.text = "Vida: " + ((int)player.maxHealth).ToString();
+        //}
 
         // Actualizar el texto de la munición del fusil
         if (municionTexto != null && fusil != null)
@@ -28,5 +27,4 @@ public class HUD : MonoBehaviour
             municionTexto.text = "Munición: " + fusil.municionActual + " / " + fusil.maxCargador;
         }
     }
-
 }

@@ -16,8 +16,8 @@ public class ArmaPrincipal : MonoBehaviour
     private Vector3 posicionInicialBrazo;  // Posición inicial de los brazos
     private bool enRetroceso = false;  // Para controlar si el retroceso está activo
 
-    [SerializeField] private int maxCargador = 35;  // Número máximo de balas en el cargador
-    private int municionActual;  // Número actual de balas en el cargador
+    [SerializeField] public int maxCargador = 35;  // Número máximo de balas en el cargador
+    public int municionActual;  // Número actual de balas en el cargador
     private bool puedeDisparar = true;  // Para controlar el disparo rápido
 
     [SerializeField] private float tiempoEntreDisparos = 0.1f;  // Tiempo entre disparos consecutivos (disparo rápido)
