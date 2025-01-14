@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1597978727915149768}
   m_Layer: 0
   m_Name: Bala 1
-  m_TagString: Untagged
+  m_TagString: BalaPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 781574950409911381}
   m_Layer: 0
   m_Name: 'Bala '
-  m_TagString: Untagged
+  m_TagString: BalaPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

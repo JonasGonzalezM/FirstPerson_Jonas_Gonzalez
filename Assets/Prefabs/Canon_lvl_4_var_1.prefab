@@ -108,6 +108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 13325331622164341}
+  - component: {fileID: 1988702412396337956}
   - component: {fileID: 4231267118339340645}
   - component: {fileID: 6343152562874405388}
   - component: {fileID: 2423644862462442326}
@@ -133,6 +134,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1397863675435746163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1988702412396337956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068819658049439033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d66cbc36ed4839d4ab3966c45e9e01d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &4231267118339340645
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -198,7 +211,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -263,6 +276,7 @@ MonoBehaviour:
   fogonazoPrefab: {fileID: 337669658940720882, guid: 05e22925977142c469e7bfa1c6b7ba34,
     type: 3}
   vidaBala: 3
+  rangoDisparo: 160
 --- !u!114 &5580741563814218707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +398,7 @@ MonoBehaviour:
   fogonazoPrefab: {fileID: 337669658940720882, guid: 05e22925977142c469e7bfa1c6b7ba34,
     type: 3}
   vidaBala: 3
+  rangoDisparo: 160
 --- !u!114 &6068537197090561543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,6 +532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1397863675435746163}
+  - component: {fileID: 981419278005448105}
   - component: {fileID: 6973885904557959355}
   - component: {fileID: 5742039384057941624}
   - component: {fileID: 916642631397188225}
@@ -536,7 +552,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7514359305336198827}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00000006657903, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.1788063, y: 0.019999761, z: 6.2885}
   m_LocalScale: {x: 1.6452, y: 1.6452, z: 1.6452}
   m_ConstrainProportionsScale: 0
@@ -545,6 +561,20 @@ Transform:
   - {fileID: 13325331622164341}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &981419278005448105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7514359305336198827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bf7b00c5e3888469b3700bdbcb8053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidaActual: 200
+  danoBala: 5
 --- !u!114 &6973885904557959355
 MonoBehaviour:
   m_ObjectHideFlags: 0
