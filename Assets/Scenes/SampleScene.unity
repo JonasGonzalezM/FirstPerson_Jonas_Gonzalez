@@ -39532,6 +39532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1235697179}
+  - component: {fileID: 1235697187}
   - component: {fileID: 1235697186}
   - component: {fileID: 1235697184}
   - component: {fileID: 1235697183}
@@ -39601,10 +39602,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ba8f26a072bad438d5bb3d29d3fa99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 9
-  sprintSpeed: 25
+  walkSpeed: 12
+  sprintSpeed: 15
   slideSpeed: 35
-  wallrunSpeed: 35
+  wallrunSpeed: 20
   groundDrag: 5
   jumpForce: 11
   jumpCooldown: 0.25
@@ -39711,6 +39712,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vidaJugador: 100
+--- !u!114 &1235697187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235697178}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f703fa19d13cc24ebb3b0b3ebed2ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1235697181}
+  velocidadSprint: 45
 --- !u!1 &1237387924
 GameObject:
   m_ObjectHideFlags: 0
@@ -71208,6 +71223,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1235697178}
+    - target: {fileID: 847270663820724756, guid: 072eeef0984ff3b44b421997b5fd65f4,
+        type: 3}
+      propertyPath: rangoDisparo
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 1397863675435746163, guid: 072eeef0984ff3b44b421997b5fd65f4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -71263,6 +71283,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1235697178}
+    - target: {fileID: 6455565471727903064, guid: 072eeef0984ff3b44b421997b5fd65f4,
+        type: 3}
+      propertyPath: rangoDisparo
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 6973885904557959355, guid: 072eeef0984ff3b44b421997b5fd65f4,
         type: 3}
       propertyPath: player

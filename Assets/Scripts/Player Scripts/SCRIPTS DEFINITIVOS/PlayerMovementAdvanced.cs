@@ -61,12 +61,12 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public MovementState state; // Estado actual del jugador
     public enum MovementState
     {
-        walking, 
-        sprinting, 
-        wallrunning, 
-        crouching, 
-        sliding, 
-        air 
+        walking,
+        sprinting,
+        wallrunning,
+        crouching,
+        sliding,
+        air
     }
 
     public bool sliding; // Indica si el jugador está deslizando
@@ -139,6 +139,12 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
     }
 
+    //Para hacer que se mueva rápido se puede hacer 2 cosas, que la velocidad entre ambos o
+    //la diferencia entre 2 o mas movimientos sea menor a 4 para que el efecto sea inmediato
+    // de lo contrario lo que pasará es que el movimiento crecerá y decrecerá de manera lenta
+    // haciendo el efecto de conservar el momento o energia cinética.
+
+
     private void StateHandler()
     {
         // Estado: Corriendo por la pared
@@ -203,7 +209,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
         // Ajustar suavemente la velocidad deseada
-        float time = 0;
+        float time = -1;
         float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float startValue = moveSpeed;
 
