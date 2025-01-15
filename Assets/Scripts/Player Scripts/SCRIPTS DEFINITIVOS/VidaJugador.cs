@@ -10,6 +10,7 @@ public class VidaJugador : MonoBehaviour
     private float vidaActual;
 
     [Header("UI de Muerte")]
+    AudioSource musica;
     public GameObject canvasMuerte; // Asignar el Canvas de muerte en el Inspector
     public GameObject canvasHUD; // Asignar el Canvas HUD en el Inspector
     public GameObject canvasFinJuego; // Asignar el Canvas de fin de juego en el Inspector
@@ -18,8 +19,8 @@ public class VidaJugador : MonoBehaviour
     void Start()
     {
         vidaActual = vidaJugador;
-        canvasMuerte.SetActive(false); // Asegúrate de que el Canvas de muerte esté desactivado al inicio
-        canvasFinJuego.SetActive(false); // Asegúrate de que el Canvas de fin de juego esté desactivado al inicio
+        canvasMuerte.SetActive(false); // Canvas de muerte desactivado al iniciar el juego
+        canvasFinJuego.SetActive(false); // Canvas de fin de juego desactivado al iniciar el juego tambien
     }
 
     void Update()
@@ -66,6 +67,7 @@ public class VidaJugador : MonoBehaviour
             Time.timeScale = 0; // Detiene el tiempo del juego
             canvasHUD.SetActive(false);
             canvasMuerte.SetActive(true); // Activa el Canvas de muerte
+             
         }
     }
 
