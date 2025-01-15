@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+    public void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
     // Método para cambiar a la escena del juego
     public void IniciarJuego()
     {
-        SceneManager.LoadScene("Reiniciar"); // Cambia al nombre de la escena deseada
+        SceneManager.LoadScene("SampleScene"); // Cambia al nombre de la escena deseada
     }
 
     // Método para cerrar el juego

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VidaJugador : MonoBehaviour
 {
@@ -9,20 +10,21 @@ public class VidaJugador : MonoBehaviour
     public float vidaJugador = 100f;
     private float vidaActual;
 
-    [Header("UI de Muerte")]
+    [Header("Canvases")]
     AudioSource musica;
-    public GameObject canvasMuerte; // Asignar el Canvas de muerte en el Inspector
-    public GameObject canvasHUD; // Asignar el Canvas HUD en el Inspector
-    public GameObject canvasFinJuego; // Asignar el Canvas de fin de juego en el Inspector
+    //public GameObject canvasMuerte; // Asignar el Canvas de muerte en el Inspector
+    //public GameObject canvasHUD; // Asignar el Canvas HUD en el Inspector
+    public GameObject teclaE; // Asignar el Canvas de fin de juego en el Inspector
+    [SerializeField] private KitMedico kitMedico;
+    
     public Transform spawnPoint; // Punto de reaparición del jugador
 
     void Start()
     {
         vidaActual = vidaJugador;
-        canvasMuerte.SetActive(false); // Canvas de muerte desactivado al iniciar el juego
-        canvasFinJuego.SetActive(false); // Canvas de fin de juego desactivado al iniciar el juego tambien
-    }
 
+
+    }
     void Update()
     {
         Morir();
@@ -58,42 +60,39 @@ public class VidaJugador : MonoBehaviour
         {
             MostrarFinJuego();
         }
+
+        if (other.CompareTag("KitMedico"))
+        {
+           teclaE.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Destroy(other.gameObject);
+                vidaActual += 100;
+                teclaE.SetActive(false);
+
+                if (vidaActual >= 100)
+                {
+                    vidaActual = 100;
+                }
+            }
+        }
     }
 
     private void Morir()
     {
         if (vidaActual <= 0)
         {
-            Time.timeScale = 0; // Detiene el tiempo del juego
-            canvasHUD.SetActive(false);
-            canvasMuerte.SetActive(true); // Activa el Canvas de muerte
-             
+
+            SceneManager.LoadScene("GameOver");
+            //Cursor.lockState = CursorLockMode.None; 
         }
     }
 
     // Mostrar el Canvas de fin de juego
     private void MostrarFinJuego()
     {
-        Time.timeScale = 0; // Pausar el juego
-        canvasHUD.SetActive(false); // Desactivar el Canvas HUD
-        canvasFinJuego.SetActive(true); // Activar el Canvas de fin de juego
+        SceneManager.LoadScene("GameOver");
     }
 
-    // Método para el botón de reiniciar
-    public void ReiniciarJuego()
-    {
-        Time.timeScale = 1; // Reactiva el tiempo del juego
-        canvasMuerte.SetActive(false); // Oculta el Canvas de muerte
-        canvasFinJuego.SetActive(false); // Oculta el Canvas de fin de juego
-        canvasHUD.SetActive(true); // Activa el Canvas HUD
-        vidaActual = vidaJugador; // Restaura la vida
-        transform.position = spawnPoint.position; // Mueve al jugador al punto de spawn
-    }
-
-    // Método para el botón de salir
-    public void SalirJuego()
-    {
-        Application.Quit(); // Cierra la aplicación
-        Debug.Log("Juego cerrado."); // Útil para probar en el editor
-    }
+    
 }

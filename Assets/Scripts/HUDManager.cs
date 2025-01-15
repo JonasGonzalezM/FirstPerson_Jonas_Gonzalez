@@ -26,5 +26,7 @@ public class HUDManager : MonoBehaviour
         {
             municionTexto.text = "Munición: " + fusil.municionActual + " / " + fusil.maxCargador;
         }
+
+
     }
 }

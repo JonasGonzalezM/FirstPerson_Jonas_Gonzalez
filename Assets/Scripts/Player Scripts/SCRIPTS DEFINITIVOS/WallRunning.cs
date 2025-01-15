@@ -195,7 +195,7 @@ public class WallRunning : MonoBehaviour
 
         Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
 
-
+        //Lo que esto hace es que puedas correr hacia delante y atrás con un mismo objeto y por la misma cara
         if((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
         {
             wallForward = -wallForward;

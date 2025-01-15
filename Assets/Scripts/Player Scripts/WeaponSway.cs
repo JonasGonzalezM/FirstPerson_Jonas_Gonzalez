@@ -9,7 +9,7 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float suave;
     [SerializeField] private float swayMultiplicador;
 
-    private void FixedUpdate()
+    private void Update()
     {
         // obtener el movimiento del raton
         float mouseX = Input.GetAxisRaw("Mouse X") * swayMultiplicador;

@@ -209,7 +209,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
         // Ajustar suavemente la velocidad deseada
-        float time = -1;
+        float time = 0;
         float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float startValue = moveSpeed;
 

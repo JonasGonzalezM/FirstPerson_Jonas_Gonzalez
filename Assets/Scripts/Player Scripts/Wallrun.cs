@@ -80,11 +80,5 @@ public class Wallrun : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
-    {
-        // Visualizar las esferas para la detección de paredes
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position - transform.right * detectionRadius, detectionRadius); // Esfera izquierda
-        Gizmos.DrawWireSphere(transform.position + transform.right * detectionRadius, detectionRadius); // Esfera derecha
-    }
+   
 }
