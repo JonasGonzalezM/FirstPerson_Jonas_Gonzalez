@@ -53,7 +53,7 @@ public class VidaJugador : MonoBehaviour
         }
 
         // Si el jugador entra en una zona de fin de juego
-        if (other.CompareTag("ZonaFinJuego"))
+        if (other.CompareTag("FinDelJuego"))
         {
             MostrarFinJuego();
         }

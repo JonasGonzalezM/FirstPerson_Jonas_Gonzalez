@@ -9,6 +9,7 @@ TagManager:
   - BalaPlayer
   - Pared
   - Suelo
+  - FinDelJuego
   layers:
   - Default
   - TransparentFX
