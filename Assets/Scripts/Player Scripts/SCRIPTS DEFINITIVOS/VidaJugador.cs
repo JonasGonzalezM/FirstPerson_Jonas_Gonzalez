@@ -10,14 +10,16 @@ public class VidaJugador : MonoBehaviour
     private float vidaActual;
 
     [Header("UI de Muerte")]
-    public GameObject canvasMuerte; // Asignar el Canvas en el Inspector
-    public GameObject canvasHUD; // Asignar el Canvas en el Inspector
+    public GameObject canvasMuerte; // Asignar el Canvas de muerte en el Inspector
+    public GameObject canvasHUD; // Asignar el Canvas HUD en el Inspector
+    public GameObject canvasFinJuego; // Asignar el Canvas de fin de juego en el Inspector
     public Transform spawnPoint; // Punto de reaparición del jugador
 
     void Start()
     {
         vidaActual = vidaJugador;
-        canvasMuerte.SetActive(false); // Asegúrate de que el Canvas esté desactivado al inicio
+        canvasMuerte.SetActive(false); // Asegúrate de que el Canvas de muerte esté desactivado al inicio
+        canvasFinJuego.SetActive(false); // Asegúrate de que el Canvas de fin de juego esté desactivado al inicio
     }
 
     void Update()
@@ -49,6 +51,12 @@ public class VidaJugador : MonoBehaviour
         {
             vidaActual -= 100;
         }
+
+        // Si el jugador entra en una zona de fin de juego
+        if (other.CompareTag("ZonaFinJuego"))
+        {
+            MostrarFinJuego();
+        }
     }
 
     private void Morir()
@@ -61,12 +69,21 @@ public class VidaJugador : MonoBehaviour
         }
     }
 
+    // Mostrar el Canvas de fin de juego
+    private void MostrarFinJuego()
+    {
+        Time.timeScale = 0; // Pausar el juego
+        canvasHUD.SetActive(false); // Desactivar el Canvas HUD
+        canvasFinJuego.SetActive(true); // Activar el Canvas de fin de juego
+    }
+
     // Método para el botón de reiniciar
     public void ReiniciarJuego()
     {
         Time.timeScale = 1; // Reactiva el tiempo del juego
-        canvasMuerte.SetActive(false); // Oculta el Canvas
-        canvasHUD.SetActive(true);
+        canvasMuerte.SetActive(false); // Oculta el Canvas de muerte
+        canvasFinJuego.SetActive(false); // Oculta el Canvas de fin de juego
+        canvasHUD.SetActive(true); // Activa el Canvas HUD
         vidaActual = vidaJugador; // Restaura la vida
         transform.position = spawnPoint.position; // Mueve al jugador al punto de spawn
     }
