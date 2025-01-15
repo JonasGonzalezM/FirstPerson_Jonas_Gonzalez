@@ -7,6 +7,8 @@ TagManager:
   - SueloMortal
   - BalaEnemiga
   - BalaPlayer
+  - Pared
+  - Suelo
   layers:
   - Default
   - TransparentFX

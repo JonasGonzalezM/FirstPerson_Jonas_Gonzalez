@@ -6,7 +6,7 @@ public class GiroTorretaMediana : MonoBehaviour
 {
     [SerializeField] public GameObject player;
 
-    [SerializeField] private float velocidadGiro = 5f; // Velocidad de giro de la torreta
+    [SerializeField] private float velocidadGiro = 1f; // Velocidad de giro de la torreta
 
     // Start is called before the first frame update
     void Start()
